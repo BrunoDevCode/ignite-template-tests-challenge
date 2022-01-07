@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs";
-import { AppError } from "../../../../shared/errors/AppError";
 import { InMemoryUsersRepository } from "../../repositories/in-memory/InMemoryUsersRepository";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
+import { IncorrectEmailOrPasswordError } from "./IncorrectEmailOrPasswordError";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let authenticateUserUseCase: AuthenticateUserUseCase;
@@ -43,7 +43,7 @@ describe('Authenticate User', () => {
         email: 'user@wrong.com',
         password: '12345'
       });
-    }).rejects.toBeInstanceOf(AppError);
+    }).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError);
   })
 
   it('should not be able to authenticate user with wrong password', async () => {
@@ -60,6 +60,6 @@ describe('Authenticate User', () => {
         email: 'user@test.com',
         password: 'wrong pass'
       });
-    }).rejects.toBeInstanceOf(AppError);
+    }).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError);
   });
 })
