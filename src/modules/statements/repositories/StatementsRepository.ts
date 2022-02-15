@@ -47,7 +47,7 @@ export class StatementsRepository implements IStatementsRepository {
     });
   }
 
- "" async getUserBalance({ user_id, with_statement = false }: IGetBalanceDTO):
+ async getUserBalance({ user_id, with_statement = false }: IGetBalanceDTO):
     Promise<
       { balance: number } | { balance: number, statement: Statement[] }
     >
