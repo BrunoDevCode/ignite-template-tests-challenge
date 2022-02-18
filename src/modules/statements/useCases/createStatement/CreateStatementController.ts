@@ -13,9 +13,9 @@ export class CreateStatementController {
   async execute(request: Request, response: Response) {
     const { id: user_id } = request.user;
     const { amount, description } = request.body;
-    const { user_id: recipient_id } = request.params;
+    const { recipient_id } = request.params;
 
-    const splittedPath = request.originalUrl.split('/')
+    const splittedPath = request.originalUrl.split('/', 5)
     const type = splittedPath[splittedPath.length - 1] as OperationType;
 
     const createStatement = container.resolve(CreateStatementUseCase);
@@ -25,7 +25,7 @@ export class CreateStatementController {
       type,
       amount,
       description,
-      }, recipient_id
+    }, recipient_id
     );
 
     return response.status(201).json(statement);
